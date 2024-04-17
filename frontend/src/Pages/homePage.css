@@ -1,7 +1,7 @@
 .container{
     height: 100vh;
     width: 100%;
-    text-align: center;
+    text-align: left;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -30,14 +30,13 @@
     margin: 1% 0 0 35%;
     padding: 30px;
     border-radius: 5px;
-    height: 80vh;
+    height: 10vh;
 }
 
 .login {
     display: flex;
     justify-content: center;
     align-items: self-start;
-    margin-bottom: 450PX;
     width: 70%;
     background-color: wheat;
     padding: 8px;
@@ -55,7 +54,6 @@
 .signup{
     display: flex;
     justify-content: center;
-    margin-bottom: 450PX;
     width: 70%;
     background-color: wheat;
     padding: 8px;
@@ -71,5 +69,6 @@
     color: white; 
     /* Optional: Change text color on hover for better contrast */
   }
+  
 
 

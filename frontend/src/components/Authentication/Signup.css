@@ -1,14 +1,50 @@
 .Signup{
-    height: 90vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin-left: 35%;
+    margin-bottom: 5%;
+    width: 32%;
+    background-color: white;
+    
 }
 .SignupForm{
     display: flex;
     flex-direction: column;
+    margin-top: 50px;
+    
     
 }
 .SignupForm>label{
-    text-align: left;
+    
+    font-weight: 700;
+    margin-le: 100px;
+
 }
+.SignupForm label[for]:after {
+    content: "*";
+    color: red;
+    margin-left: 2px; /* Add some spacing between the label text and the asterisk */
+  }
+
+  .SignupInput{
+    padding: 5px;
+    border: none;
+    background-color: white;
+    margin-left: 20px;
+    
+
+  }
+  .SignupForm button {
+    background-color: #007bff; /* Blue color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Adjust padding */
+    cursor: pointer; /* Show pointer cursor on hover */
+  }
+  
+  
+  
