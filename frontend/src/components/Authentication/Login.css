@@ -1,4 +1,4 @@
-.Signup{
+.Login{
     height: 70vh;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,8 @@
     background-color: white;
     
 }
-.SignupForm{
+
+.LoginForm{
     display: flex;
     flex-direction: column;
     margin-top: 50px;
@@ -20,7 +21,7 @@
     
     
 }
-.SignupForm>label{
+.LoginForm>label{
     
     font-weight: 700;
     margin-left: 5px;
@@ -28,36 +29,19 @@
     
 
 }
-.SignupForm label[for]:after {
+.LoginForm label[for]:after {
     content: "*";
     color: red;
     margin-left: 2px;
      /* Add some spacing between the label text and the asterisk */
   }
-
-  .SignupInput{
+  .LoginInput{
     padding: 10px;
     border: none;
     background-color: white;
     
     
     
+    
 
-  }
-  .signupBtn {
-    background-color: #007bff; /* Blue color */
-    color: white; /* Text color */
-    border: none; /* Remove border */
-    padding: 10px 20px; /* Adjust padding */
-    cursor: pointer; 
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 100%;
-    /* Show pointer cursor on hover */
-  }
-  .showBtn{
-    width: 1;
-  }
-  
-  
-  
+  }  
