@@ -11,11 +11,39 @@ const Signup = () => {
   const [password,setPassword] = useState();
   const [confirmPassword,setConfirmPassword] = useState();
   const [pic,setPic] = useState();
+  const [loading,setloading] = useState(false);
+
   
   const handleClick = () =>setShow(!show)
   const handleClick1 = () =>setShow1(!show1)
 
-  const postDetails = (pics) => { };
+  const postDetails = (pics) => { 
+    setloading(true);
+    if(pics === undefined) {
+        const warningMessage = document.createElement('div');
+        warningMessage.textContent = 'Please select the image.';
+        warningMessage.style.backgroundColor = 'yellow';
+        warningMessage.style.color = 'black';
+        warningMessage.style.padding = '10px';
+        warningMessage.style.position = 'fixed';
+        warningMessage.style.bottom = '20px';
+        warningMessage.style.left = '50%';
+        warningMessage.style.transform = 'translateX(-50%)';
+        warningMessage.style.borderRadius = '5px';
+        warningMessage.style.zIndex = '9999';
+        document.body.appendChild(warningMessage);
+        
+        setTimeout(() => {
+            document.body.removeChild(warningMessage);
+        }, 5000);
+        
+        // Add return statement here
+        return;
+    }
+    
+    // If pics is not undefined, continue with further processing
+};
+
   const submitHandler = () => {};
 
 

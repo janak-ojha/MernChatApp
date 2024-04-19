@@ -10,7 +10,7 @@ const Login = () => {
   const handleClick = () =>setShow(!show)
 
   const submitHandler = () => {};
-  const submitHandler2 = () => {};
+
 
 
   return (
@@ -42,10 +42,14 @@ const Login = () => {
 
         </div>
 
-        <button  style={{backgroundColor:"blue", color:"white",padding:"8px" ,borderRadius:"10px",  marginTop:"15px"}} 
+        <button  style={{backgroundColor:"blue", color:"white",width:"100%",padding:"8px" ,borderRadius:"10px",  marginTop:"15px"}} 
         type="submit" onClick={submitHandler}>login</button>
-        <button  style={{backgroundColor:"red", color:"white" ,padding:"8px",borderRadius:"10px",  marginTop:"15px"}} 
-        type="submit" onClick={submitHandler2}>Get Guest User Credentials</button>
+        <button  
+        style={{backgroundColor:"red", color:"white",width:"100%" ,padding:"8px",borderRadius:"10px",  marginTop:"3px"}} 
+        type="submit" onClick={() => {
+          setEmail("guest@gmail.com");
+          setPassword("12345");
+        }}>Get Guest User Credentials</button>
          
       </form>
     </div>
