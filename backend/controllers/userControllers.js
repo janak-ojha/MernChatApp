@@ -34,6 +34,7 @@ const registerUser = asyncHandler(async (req,res) => {
             pic: user.pic,
             token: generateToken(user._id),
         });
+        console.log("dbwibdvw")
        } else{
         res.status(400);
         throw new Error("failed to  create the user")
