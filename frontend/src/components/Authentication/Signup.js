@@ -20,47 +20,47 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault(); // Prevent default form submission
     setLoading(true);
-
+  
     if (!name || !email || !password || !confirmPassword) {
       alert("Please fill all the fields");
       setLoading(false);
       return;
     }
-
+  
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       setLoading(false);
       return;
     }
-
+  
     try {
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
-
       const { data } = await axios.post(
         "/api/user",
-        { name, email, password, pic},
+        { name, email, password, pic },
         config
       );
-    
+      
+  
       alert("Registered Successfully");
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
+      history("/login"); // Corrected this line
     } catch (error) {
-      console.error(error);
+      console.log(error);
       alert("An error occurred while registering");
       setLoading(false);
-      history('/login');
     }
-  };
+  };  
 
   const postDetails = (pics) => {
     setLoading(false);
     if (!pics) {
-      alert("Please select the image");
+      alert("Please select the image" );
       setLoading(false);
       return;
     }

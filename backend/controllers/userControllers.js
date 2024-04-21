@@ -5,12 +5,13 @@ const generateToken =require("../config/generateToken");
 
 const registerUser = asyncHandler(async (req,res) => {
     const { name, email, password ,pic } = req.body;
+    console.log(name,email,password);
 
     if(!name || !email || !password){
         res.status(400);
         throw new Error("please enter all the fields");
     }
-       const userExists = await User.findOne({email});
+       const userExists = await User.findOne({ email });
        
        if(userExists)
        {
