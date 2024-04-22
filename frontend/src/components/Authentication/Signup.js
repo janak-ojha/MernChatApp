@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './Signup.css';
-import axios from "axios"
+import React, { useState } from "react";
+import "./Signup.css";
+
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -20,32 +20,41 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault(); // Prevent default form submission
     setLoading(true);
-  
+
     if (!name || !email || !password || !confirmPassword) {
       alert("Please fill all the fields");
       setLoading(false);
       return;
     }
-  
+
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       setLoading(false);
       return;
     }
-  
+    if(!pic){
+      alert("photo is uploading in cloudinary, So please wait!");
+      return;
+    }
+    console.log("dihfdo");
+
     try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const { data } = await axios.post(
-        "/api/user",
-        { name, email, password, pic },
-        config
-      );
       
-  
+    
+      console.log("idhfoid");
+      let fields = {name,email,password,pic};
+      console.log(fields);
+      let data = await fetch(`http://localhost:5000/api/user/register`,{
+        method:"post",
+        body: JSON.stringify(fields),
+        headers:{
+          "Content-Type": "application/json"
+        }
+      });
+
+      data = await data.json();
+      console.log(data)
+
       alert("Registered Successfully");
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
@@ -55,17 +64,19 @@ const Signup = () => {
       alert("An error occurred while registering");
       setLoading(false);
     }
-  };  
+  };
 
   const postDetails = (pics) => {
     setLoading(false);
+    console.log(pics);
     if (!pics) {
-      alert("Please select the image" );
+      alert("Please select the image");
       setLoading(false);
       return;
     }
 
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      console.log("udhfiduh");
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "chat-app");
@@ -82,8 +93,8 @@ const Signup = () => {
           setLoading(false);
         })
         .catch((err) => {
-          console.error(err);
-          alert("An error occurred while uploading the image");
+          console.log(err);
+          alert(err.message);
           setLoading(false);
         });
     } else {
@@ -94,14 +105,14 @@ const Signup = () => {
   };
 
   return (
-    <div className='Signup'>
-      <form className='SignupForm' onSubmit={submitHandler}>
+    <div className="Signup">
+      <form className="SignupForm" onSubmit={submitHandler}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
-          className='SignupInput'
+          className="SignupInput"
           id="name"
-          placeholder='Enter your name'
+          placeholder="Enter your name"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -110,9 +121,9 @@ const Signup = () => {
         <label htmlFor="email">Email</label>
         <input
           type="email"
-          className='SignupInput'
+          className="SignupInput"
           id="email"
-          placeholder='Enter your email'
+          placeholder="Enter your email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -122,16 +133,20 @@ const Signup = () => {
         <div className="passwordInputContainer">
           <input
             type={show1 ? "text" : "password"}
-            className='SignupInput'
+            className="SignupInput"
             id="password"
-            placeholder='Enter your password'
+            placeholder="Enter your password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
-            style={{ backgroundColor: "white", color: "black", fontWeight: "600" }}
-            type='button'
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              fontWeight: "600",
+            }}
+            type="button"
             onClick={handleClick1}
           >
             {show1 ? "Hide" : "Show"}
@@ -142,16 +157,20 @@ const Signup = () => {
         <div className="passwordInputContainer2">
           <input
             type={show ? "text" : "password"}
-            className='SignupInput'
+            className="SignupInput"
             id="confirmPassword"
-            placeholder='Confirm Password'
+            placeholder="Confirm Password"
             required
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <button
-            style={{ backgroundColor: "white", color: "black", fontWeight: "600" }}
-            type='button'
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              fontWeight: "600",
+            }}
+            type="button"
             onClick={handleClick}
           >
             {show ? "Hide" : "Show"}

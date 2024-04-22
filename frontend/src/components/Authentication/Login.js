@@ -1,15 +1,56 @@
 import React, { useState } from 'react'
 import "./Login.css";
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email,setEmail] = useState();
   const [password,setPassword] =useState();
   const [show,setShow] = useState(false);
-  
+  const [loading,setLoading] = useState(false);  
+  const history = useNavigate();
   const handleClick = () =>setShow(!show)
 
-  const submitHandler = () => {};
+  const submitHandler = async(e) => {
+    e.preventDefault(); // Prevent default form submission
+    setLoading(true);
+
+    if (!email || !password) {
+      alert("Please fill all the fields");
+      setLoading(false);
+      return;
+    }
+    try {
+      
+    
+      
+      let fields = {email,password};
+      console.log(fields);
+      let data = await fetch(`http://localhost:5000/api/user/login`,{
+        method:"post",
+        body: JSON.stringify(fields),
+        headers:{
+          "Content-Type": "application/json"
+        }
+      });
+      data = await data.json();
+      console.log(data)
+
+      alert("login succesfull");
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      history("/chats"); 
+    } 
+    catch (error) {
+      console.log(error);
+      alert("An error occurred while login");
+      setLoading(false);
+    }
+
+   
+      
+
+
+  };
 
 
 
@@ -43,7 +84,12 @@ const Login = () => {
         </div>
 
         <button  style={{backgroundColor:"blue", color:"white",width:"100%",padding:"8px" ,borderRadius:"10px",  marginTop:"15px"}} 
-        type="submit" onClick={submitHandler}>login</button>
+        type="submit" 
+        onClick={submitHandler}
+        disabled={loading}
+        >
+        {loading ? "Login.." : "Login"}
+        </button>
         <button  
         style={{backgroundColor:"red", color:"white",width:"100%" ,padding:"8px",borderRadius:"10px",  marginTop:"3px"}} 
         type="submit" onClick={() => {
