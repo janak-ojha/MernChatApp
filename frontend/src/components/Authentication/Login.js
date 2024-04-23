@@ -12,7 +12,7 @@ const Login = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault(); // Prevent default form submission
-    setLoading(true);
+    setLoading(false);
 
     if (!email || !password) {
       alert("Please fill all the fields");
@@ -33,7 +33,7 @@ const Login = () => {
         }
       });
       data = await data.json();
-      console.log(data)
+      
 
       alert("login succesfull");
       localStorage.setItem("userInfo", JSON.stringify(data));
@@ -56,12 +56,13 @@ const Login = () => {
 
   return (
     <div className='Login'>
-      <form className='LoginForm'>
+      <form className='LoginForm' onSubmit={submitHandler}>
         <label htmlFor='email' >Email</label>
         <input type="email"
         className='LoginInput'
         id='email'
         placeholder='Enter your email' 
+        value={email}
         required
         onChange={(e) => setEmail(e.target.value)}
         />
@@ -73,6 +74,7 @@ const Login = () => {
           className='SignupInput'
           id="password" // Add an ID to match the label's `for` attribute
           placeholder='Enter your password'
+          value={password}
           required // Mark the input field as required
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -85,14 +87,14 @@ const Login = () => {
 
         <button  style={{backgroundColor:"blue", color:"white",width:"100%",padding:"8px" ,borderRadius:"10px",  marginTop:"15px"}} 
         type="submit" 
-        onClick={submitHandler}
         disabled={loading}
         >
         {loading ? "Login.." : "Login"}
         </button>
         <button  
         style={{backgroundColor:"red", color:"white",width:"100%" ,padding:"8px",borderRadius:"10px",  marginTop:"3px"}} 
-        type="submit" onClick={() => {
+        type="submit" 
+        onClick={() => {
           setEmail("guest@gmail.com");
           setPassword("12345");
         }}>Get Guest User Credentials</button>
