@@ -33,6 +33,7 @@ const Signup = () => {
       return;
     }
     if(!pic){
+      setLoading(false);
       alert("photo is uploading in cloudinary, So please wait!");
       return;
     }
@@ -55,7 +56,6 @@ const Signup = () => {
       data = await data.json();
       console.log(data)
 
-      alert("Registered Successfully");
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       history("/login"); // Corrected this line
@@ -76,7 +76,7 @@ const Signup = () => {
     }
 
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      console.log("udhfiduh");
+      
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "chat-app");

@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './homePage.css';
 import Login from '../components/Authentication/Login';
 import Signup from '../components/Authentication/Signup';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function HomePage() {
   const [showLogin, setShowLogin] = useState(true);
   const [showSignup, setShowSignup] = useState(false);
+  const history=useNavigate()
+
+  useEffect(() =>{
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if(user) history("/chats");
+  },[history]);
 
   const toggleForm = (form) => {
     if (form === 'login') {

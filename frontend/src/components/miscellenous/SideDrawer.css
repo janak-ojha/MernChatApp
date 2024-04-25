@@ -1,0 +1,72 @@
+
+.container{
+    height: 8%;
+    background: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+    
+}
+.searchIcon {
+    background-color: transparent; 
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    width: 30px;
+    height: 100%;
+    display: inline-block;
+    
+    
+}
+.searchIcon:hover {
+    background-color: #fff; /* Change background color on hover */
+  }
+.tooltip {
+    visibility: hidden;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    top: 35px; /* Position at the bottom of the search icon */
+    left: 60px;
+    transform: translateX(-50%);
+    position: absolute;  
+}
+
+.searchIcon:hover .tooltip {
+    visibility: visible;
+
+}
+.search{
+        margin-left: 10px;
+        white-space: nowrap;
+        font-size: 16px;
+        position: absolute;
+        
+      
+}
+.search:hover {
+    background-color: #fff; 
+        /* Change background color on hover */
+  }
+
+.talk{
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    position: absolute; /* Position the "Talk-A-Tive" text */
+    left: 45%; /* Center horizontally */
+    
+}
+.bell{
+    border: none;
+    font-size: 18px;
+    margin: 10px;
+}

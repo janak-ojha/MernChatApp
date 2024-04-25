@@ -3,8 +3,8 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email,setEmail] = useState();
-  const [password,setPassword] =useState();
+  const [email,setEmail] = useState("");
+  const [password,setPassword] =useState("");
   const [show,setShow] = useState(false);
   const [loading,setLoading] = useState(false);  
   const history = useNavigate();
@@ -12,7 +12,7 @@ const Login = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault(); // Prevent default form submission
-    setLoading(false);
+    setLoading(true);
 
     if (!email || !password) {
       alert("Please fill all the fields");
@@ -24,7 +24,7 @@ const Login = () => {
     
       
       let fields = {email,password};
-      console.log(fields);
+      
       let data = await fetch(`http://localhost:5000/api/user/login`,{
         method:"post",
         body: JSON.stringify(fields),
@@ -35,7 +35,7 @@ const Login = () => {
       data = await data.json();
       
 
-      alert("login succesfull");
+    
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       history("/chats"); 
