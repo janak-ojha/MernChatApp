@@ -1,7 +1,7 @@
 import { ChatState } from "../context/ChatProvider";
 import SideDrawer from "../components/miscellenous/SideDrawer";
-import MyChat from "../components/miscellenous/MyChat";
-import ChatBox from "../components/miscellenous/ChatBox";
+import MyChat from "../components/MyChat";
+import ChatBox from "../components/ChatBox";
 import "./ChatPage.css"
 
 const ChatPage = () => {

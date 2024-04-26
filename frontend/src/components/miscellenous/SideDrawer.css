@@ -63,10 +63,61 @@
     font-size: 30px;
     position: absolute; /* Position the "Talk-A-Tive" text */
     left: 45%; /* Center horizontally */
+
     
+}
+.icon{
+    position: absolute;
+    left: 87%;
 }
 .bell{
     border: none;
     font-size: 18px;
     margin: 10px;
+}
+
+.picture{
+    border-radius: 10px;
+    position: absolute;
+    left: 90.5%;
+}
+.profile{
+    border-radius: 70%;
+}
+
+.picture .profile {
+    background-color: #f0f0f0; /* Background color for the profile button */
+    border: none;
+    padding: 0; /* Remove padding */
+    cursor: pointer;
+    display: flex; /* Make the button flex container */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center content horizontally */
+  }
+  
+  .picture .profile img {
+    width: 40px; /* Width of the profile picture */
+    height: 40px; /* Height of the profile picture */
+    border-radius: 50%; /* Make the image round */
+    margin-right: 8px; /* Add some space between the image and the name */
+  }
+  
+  .picture .profile span {
+    font-size: 16px; /* Font size for the user's name */
+    color: #333; /* Text color */
+  }
+  
+
+
+  
+.scroll{
+    position: absolute;
+    left: 94%;
+    border: none;
+    width: 6%;
+}
+.usertype{
+    width: 100%;
+    border: none;
+    
 }
