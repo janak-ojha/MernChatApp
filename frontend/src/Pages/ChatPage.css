@@ -5,9 +5,9 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    top: 0; /* Position it at the top of the viewport */
-    left: 0; /* Position it at the left of the viewport */
-    overflow-y: auto; /* Allow vertical scrolling if content exceeds viewport height */
+    top: 0;
+    left: 0; 
+    overflow-y: auto; 
 }
 
 .sidebox{

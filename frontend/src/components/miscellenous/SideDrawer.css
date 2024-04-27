@@ -79,27 +79,30 @@
 .picture{
     border-radius: 10px;
     position: absolute;
-    left: 90.5%;
+    left: 91%;
+    
 }
 .profile{
     border-radius: 70%;
 }
 
 .picture .profile {
-    background-color: #f0f0f0; /* Background color for the profile button */
+     /* Background color for the profile button */
     border: none;
     padding: 0; /* Remove padding */
     cursor: pointer;
     display: flex; /* Make the button flex container */
     align-items: center; /* Align items vertically */
-    justify-content: center; /* Center content horizontally */
+    justify-content: center;
+     /* Center content horizontally */
   }
   
   .picture .profile img {
     width: 40px; /* Width of the profile picture */
     height: 40px; /* Height of the profile picture */
-    border-radius: 50%; /* Make the image round */
-    margin-right: 8px; /* Add some space between the image and the name */
+    border-radius: 80%; /* Make the image round */
+    box-shadow: none;
+     /* Add some space between the image and the name */
   }
   
   .picture .profile span {
@@ -112,7 +115,7 @@
   
 .scroll{
     position: absolute;
-    left: 94%;
+    left: 95%;
     border: none;
     width: 6%;
 }
@@ -121,3 +124,22 @@
     border: none;
     
 }
+.user-details{
+    
+    background-color: whitesmoke;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    top: 35px; /* Position at the bottom of the search icon */
+    left: 90%;
+    transform: translateX(-50%);
+    position: absolute; 
+     
+    } 
+
+
+
+
+  
