@@ -130,7 +130,7 @@ const Signup = () => {
         />
 
         <label htmlFor="password">Password</label>
-        <div className="passwordInputContainer">
+        <div className="SignuppasswordInputContainer">
           <input
             type={show1 ? "text" : "password"}
             className="SignupInput"
@@ -154,7 +154,7 @@ const Signup = () => {
         </div>
 
         <label htmlFor="confirmPassword">Confirm Password</label>
-        <div className="passwordInputContainer2">
+        <div className="SignuppasswordInputContainer2">
           <input
             type={show ? "text" : "password"}
             className="SignupInput"

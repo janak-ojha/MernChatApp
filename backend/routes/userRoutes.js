@@ -9,4 +9,5 @@ router.post("/login", authUser);
 router.get("/userall",protect,allUser);
 
 
+
 module.exports=router;

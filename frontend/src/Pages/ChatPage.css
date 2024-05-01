@@ -1,5 +1,5 @@
 .chatContainer {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     text-align: left;
     align-items: center;
@@ -7,12 +7,16 @@
     position: fixed;
     top: 0;
     left: 0; 
-    overflow-y: auto; 
+    
 }
 
-.sidebox{
-    height: 5%;
+.Chatsidebox{
+    height: 8vh;
     width: 100%;
+    align-items: center;
+    background-color: white;
+    justify-content: center;
+    text-align: center;
 }
 .chatbox{
     display: flex;

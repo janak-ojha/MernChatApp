@@ -1,6 +1,6 @@
 
-.container{
-    height: 8%;
+.Sidecontainer{
+    height: 8vh;
     background: white;
     width: 100%;
     display: flex;
@@ -11,7 +11,7 @@
     
     
 }
-.searchIcon {
+.SidesearchIcon {
     background-color: transparent; 
     border: none;
     cursor: pointer;
@@ -23,10 +23,10 @@
     
     
 }
-.searchIcon:hover {
+.SidesearchIcon:hover {
     background-color: #fff; /* Change background color on hover */
   }
-.tooltip {
+.Sidetooltip {
     visibility: hidden;
     background-color: black;
     color: white;
@@ -40,11 +40,11 @@
     position: absolute;  
 }
 
-.searchIcon:hover .tooltip {
+.SidesearchIcon:hover .Sidetooltip {
     visibility: visible;
 
 }
-.search{
+.Sidesearch{
         margin-left: 10px;
         white-space: nowrap;
         font-size: 16px;
@@ -52,12 +52,12 @@
         
       
 }
-.search:hover {
+.Sidesearch:hover {
     background-color: #fff; 
         /* Change background color on hover */
   }
 
-.talk{
+.Sidetalk{
     align-items: center;
     text-align: center;
     font-size: 30px;
@@ -66,27 +66,27 @@
 
     
 }
-.icon{
+.Sideicon{
     position: absolute;
     left: 87%;
 }
-.bell{
+.Sidebell{
     border: none;
     font-size: 18px;
     margin: 10px;
 }
 
-.picture{
+.Sidepicture{
     border-radius: 10px;
     position: absolute;
     left: 91%;
     
 }
-.profile{
+.Sideprofile{
     border-radius: 70%;
 }
 
-.picture .profile {
+.Sidepicture .Sideprofile {
      /* Background color for the profile button */
     border: none;
     padding: 0; /* Remove padding */
@@ -97,7 +97,7 @@
      /* Center content horizontally */
   }
   
-  .picture .profile img {
+  .Sidepicture .Sideprofile img {
     width: 40px; /* Width of the profile picture */
     height: 40px; /* Height of the profile picture */
     border-radius: 80%; /* Make the image round */
@@ -105,7 +105,7 @@
      /* Add some space between the image and the name */
   }
   
-  .picture .profile span {
+  .Sidepicture .Sideprofile span {
     font-size: 16px; /* Font size for the user's name */
     color: #333; /* Text color */
   }
@@ -113,7 +113,7 @@
 
 
   
-.scroll{
+.Sidescroll{
     position: absolute;
     left: 95%;
     border: none;
@@ -124,7 +124,7 @@
     border: none;
     
 }
-.user-details{
+.Sideuser-details{
     
     background-color: whitesmoke;
     color: black;
@@ -138,8 +138,58 @@
     position: absolute; 
      
     } 
+    .drawer-navigation {
+        position:absolute; /* Position the navigation menu */
+        top: 8vh; /* Adjust the top position to align with the top of the side drawer */
+        left: 0;
+        height: 100%; /* Make the navigation menu cover the remaining height of the side drawer */
+        width: 250px; /* Set the width of the navigation menu */
+        background-color: #fff; /* Background color of the navigation menu */
+        z-index: 1; /* Ensure the navigation menu is above other elements */
+        transition: transform 0.3s ease-in-out; 
+        overflow-y: auto; /* Smooth transition for opening/closing the drawer */
+      }
+      
+      .drawer-navigation ul {
+        list-style-type: none; /* Remove default list styles */
+        padding: 0;
+      }
+      
+      .drawer-navigation li {
+        padding: 10px 20px; /* Add padding to list items for better spacing */
+      }
+      
+      .drawer-navigation a {
+        text-decoration: none; /* Remove underline from anchor links */
+        color: #333; /* Text color for anchor links */
+        font-size: 18px; /* Font size for anchor links */
+        display: block; /* Make anchor links block-level elements */
+      }
+      
+      .drawer-navigation a:hover {
+        background-color: #f0f0f0; /* Change background color on hover */
+      }
+      .DrawInput{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        
+      }
+      .drawI{
+        width: 65%;
+        padding: 6px;
+        border-radius: 8;
+        border-color: aqua;
 
+        
+      }
+      .drawB{
+        background-color: rgb(247, 249, 252);
+        width: 20%;
+        margin-left: 2px;
+        
+        padding: 10px;
+        border: none;
 
-
-
-  
+      }

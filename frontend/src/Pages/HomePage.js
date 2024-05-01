@@ -28,18 +28,20 @@ function HomePage() {
   };
 
   return (
-    <div className='container'>
-      <div className="box">
+    <div className='Homecontainer'>
+      <div className="Homebox">
          Talk-A-Tive
       </div>
       <div>
-      <div className='box2'>
-        <div className='login' onClick={() => toggleForm('login')}>Login</div>
-        <div className="signup" onClick={() => toggleForm('signup')}>Sign up</div> 
+      <div className='Homebox2'>
+        <div className='Homelogin' onClick={() => toggleForm('login')}>Login</div>
+        <div className="Homesignup" onClick={() => toggleForm('signup')}>Sign up</div> 
       </div>
       <div>
+        <div className='homebox3'> 
         {showLogin && <Login />}
         {showSignup && <Signup />}
+        </div>
       </div>
       </div>
     </div>

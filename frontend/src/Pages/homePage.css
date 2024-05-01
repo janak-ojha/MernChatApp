@@ -1,4 +1,4 @@
-.container{
+.Homecontainer{
     height: 100vh;
     width: 100%;
     text-align: left;
@@ -7,20 +7,20 @@
     position: fixed;
     
 }
-.box{
+.Homebox{
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 12px;
+    padding: 25px;
     background-color: white;
     margin: 2% 0 0 35%;
     width: 32%;
     border-radius: 8px;
     font-size: 25px;
-    height: 10vh;
+    height: 3vh;
 }
-.box2{
+.Homebox2{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,12 +28,12 @@
     background: white;
     width: 32%;
     margin: 1% 0 0 35%;
-    padding: 30px;
+    padding: 20px;
     border-radius: 5px;
-    height: 10vh;
+    height: 8vh;
 }
 
-.login {
+.Homelogin {
     display: flex;
     justify-content: center;
     align-items: self-start;
@@ -46,12 +46,12 @@
     transition: background-color 0.2s ease-in-out; /* Smooth color transition */
   }
   
-  .login:hover {
+  .Homelogin:hover {
     background-color: #333; /* Change to your desired hover color */
     color: white; /* Optional: Change text color on hover for better contrast */
   }
   
-.signup{
+.Homesignup{
     display: flex;
     justify-content: center;
     width: 70%;
@@ -64,7 +64,7 @@
     transition: background-color 0.2s ease-in-out; /* Smooth color transition */
     
 }
-.signup:hover {
+.Homesignup:hover {
     background-color: #333; /* Change to your desired hover color */
     color: white; 
     /* Optional: Change text color on hover for better contrast */
