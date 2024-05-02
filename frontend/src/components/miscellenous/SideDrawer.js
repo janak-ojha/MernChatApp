@@ -69,13 +69,18 @@
 
         const config = {
           headers:{
-            "Content-type":"application/json",
+            "Content-Type":"application/json",
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data }  = await axios.post("/api/chat",{ userId },config);
+        const { data }  = await axios.post("http://localhost:5000/api/chat/chataccess",{ userId },config);
+        console.log(data);
+        
+        if(!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
+
         setSelectedChat(data);
         setLoadingChat(false);
+        setShowDrawer(false);
 
       }
       catch(error){

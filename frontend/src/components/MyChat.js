@@ -1,28 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { ChatState } from '../context/ChatProvider';
 import axios from 'axios';
+import './MyChat.css';
+import ChatLoading from './chatLoading';
+import { getSender } from '../config/chatLogic';
 
 const MyChat = () => {
-  const[ loggedUser,setLoggedUser] = useState();
-  const{ selectedChat,setSelectedChat,user,chats,setChats}=ChatState();
+  const [loggedUser, setLoggedUser] = useState();
+  const { setSelectedChat, user, chats, setChats } = ChatState();
+  const [selectedChatId, setSelectedChatId] = useState(null); // State to track selected chat ID
 
-  const fetchChats = async() =>{
+  const fetchChats = async () => {
     try {
       const config = {
-        headers:{
+        headers: {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } =await axios.get("/api/chat",config);
-      setChats(data)
-      
+      const { data } = await axios.get("http://localhost:5000/api/chat/chatfetch", config);
+      setChats(data);
     } catch (error) {
-      
+      alert("Failed to load the chat");
     }
-  }
-  return (
-    <div></div>
-  )
-}
+  };
 
-export default MyChat
+  useEffect(() => {
+    setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
+    fetchChats();
+  }, []);
+
+  const handleChatSelection = (chat) => {
+    setSelectedChat(chat);
+    setSelectedChatId(chat._id); // Update selected chat ID
+  };
+
+  return (
+    <div className='MyChatContainer'>
+      <div className='MyChatbox1'>
+        <div className='myChats'>My Chat</div>
+        <button className='MyChatButton'>New Group Chat
+          <i className="fa-solid fa-plus"></i>
+        </button>
+      </div>
+      <div className='MyChatBox2'>
+        {chats ? (
+          <div className='stack-container'>
+            {chats.map((chat) => (
+              <div
+                className={`MyChatSelector ${selectedChatId === chat._id ? 'selected' : ''}`} // Apply 'selected' class if chat is selected
+                key={chat._id}
+                onClick={() => handleChatSelection(chat)} // Use handleChatSelection function
+              >
+                <div>
+                  {!chat.isGroupChat
+                    ? getSender(loggedUser, chat.users)
+                    : chat.chatName}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <ChatLoading />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MyChat;
