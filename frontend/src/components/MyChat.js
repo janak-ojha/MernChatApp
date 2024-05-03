@@ -4,6 +4,7 @@ import axios from 'axios';
 import './MyChat.css';
 import ChatLoading from './chatLoading';
 import { getSender } from '../config/chatLogic';
+import GroupChatModel from './miscellenous/GroupChatModel';
 
 const MyChat = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -38,9 +39,9 @@ const MyChat = () => {
     <div className='MyChatContainer'>
       <div className='MyChatbox1'>
         <div className='myChats'>My Chat</div>
-        <button className='MyChatButton'>New Group Chat
-          <i className="fa-solid fa-plus"></i>
-        </button>
+        <GroupChatModel>
+        
+        </GroupChatModel>
       </div>
       <div className='MyChatBox2'>
         {chats ? (
