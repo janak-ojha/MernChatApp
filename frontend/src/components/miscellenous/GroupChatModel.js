@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./GroupChatModel.css";
 import { ChatState } from '../../context/ChatProvider';
 import axios from 'axios';
+import UserListItem from "../userAvatar/UserListItem";
 
 const GroupChatModel = ({ children }) => {    
     const [isOpen, setIsOpen] = useState(false); // State to manage whether the modal is open
@@ -38,7 +39,7 @@ const GroupChatModel = ({ children }) => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            const {data} = await axios.get(`http://localhost:5000/api/user?search=${search}`,config);
+            const {data} = await axios.get(`http://localhost:5000/api/user/userall?search=${search}`,config);
             console.log(data);
             setLoading(false);
             setSearchResult(data);
@@ -50,7 +51,7 @@ const GroupChatModel = ({ children }) => {
     };
 
     const handleSubmit = () => {};
-
+    const handleGroup = () => {};
 
     return (
         <div className='groupChat'>
@@ -87,10 +88,20 @@ const GroupChatModel = ({ children }) => {
                                 placeholder='Add user: janak,ankit,bj'
                                 onClick={(e) => handleSearch(e.target.value)}
                                  />
+                                    {loading ? <div>loading</div>:(
+                                    searchResult?.slice(0,4).map(user =>(
+                                        <UserListItem
+                                        key={user._id} 
+                                        user={user} 
+                                        handleFunction={
+                                            () =>handleGroup(user)
+                                        }/>
+                                    ))
+                                
+                            )}
                                  </div>
-                                 {/* {render search user} */}
+                              
                             </form>
-                
                         </div>
                         <div className='GroupFooter'>
                             <button
