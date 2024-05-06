@@ -147,7 +147,8 @@
         background-color: #fff; /* Background color of the navigation menu */
         z-index: 1; /* Ensure the navigation menu is above other elements */
         transition: transform 0.3s ease-in-out; 
-        overflow-y: auto; /* Smooth transition for opening/closing the drawer */
+        overflow-y: auto;
+        background-color: antiquewhite; /* Smooth transition for opening/closing the drawer */
       }
       
       .drawer-navigation ul {
