@@ -1,0 +1,58 @@
+/* Style for the group container */
+.group {
+  position: relative;
+}
+
+/* Style for the group icon */
+.groupIcon {
+  cursor: pointer;
+}
+
+/* Style for the group modal */
+.groupModal {
+  position: fixed;
+  width: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for the close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 30px;
+  color: black;
+}
+
+/* Style for the group modal header */
+.groupModalHeader {
+  margin-bottom: 10px;
+}
+
+/* Style for the group modal footer */
+.groupModalFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Style for the searched group members */
+.searchedGroupMember {
+  margin-top: 20px;
+  flex-grow: 1; /* Allow the search results to expand */
+}
+
+/* Style for the group modal body */
+.GroupModelBody {
+  overflow-y: auto; /* Enable vertical scroll if needed */
+}

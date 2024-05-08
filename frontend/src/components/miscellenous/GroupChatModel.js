@@ -42,6 +42,7 @@ const GroupChatModel = ({ children }) => {
     const [loading, setLoading] = useState(false);
 
     const { user, chats, setChats } = ChatState();
+    
     const RemoveModel = () => {
         closeModal(); // Close the modal when the 'X' icon is clicked
     };

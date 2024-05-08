@@ -6,7 +6,7 @@ import ChatLoading from './chatLoading';
 import { getSender } from '../config/chatLogic';
 import GroupChatModel from './miscellenous/GroupChatModel';
 
-const MyChat = () => {
+const MyChat = ({fetchAgain}) => {
   const [loggedUser, setLoggedUser] = useState();
   const { setSelectedChat, user, chats, setChats } = ChatState();
   const [selectedChatId, setSelectedChatId] = useState(null); // State to track selected chat ID
@@ -28,7 +28,7 @@ const MyChat = () => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, []);
+  }, [fetchAgain]);
 
   const handleChatSelection = (chat) => {
     setSelectedChat(chat);
