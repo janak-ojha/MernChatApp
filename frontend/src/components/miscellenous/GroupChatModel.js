@@ -4,16 +4,25 @@ import { ChatState } from '../../context/ChatProvider';
 import axios from 'axios';
 import UserListItem from "../userAvatar/UserListItem";
 import UserBadgeItem from '../userAvatar/UserBadgeItem';
-const GroupChatModel = ({ children }) => {    
+
+const GroupChatModel = () => {    
     const [isOpen, setIsOpen] = useState(false); // State to manage whether the modal is open
     const modalRef = useRef(); // Reference to the modal element
 
+    const [groupChatName, setGroupChatName] = useState("");
+    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [searchResult, setSearchResult] = useState([]);
+    const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const { user, chats, setChats } = ChatState();
+    
     useEffect(() => {
         // Function to handle clicks outside the modal
         const handleClickOutside = (event) => {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
                 setIsOpen(false);
-                setSearchResult([]);  // Close the modal if the click is outside
+                resetModal(); // Reset the modal fields
             }
         };
 
@@ -32,19 +41,12 @@ const GroupChatModel = ({ children }) => {
 
     const closeModal = () => {
         setIsOpen(false);
-        setSearchResult([]);  // Set isOpen to false to close the modal
     };
 
-    const [groupChatName, setGroupChatName] = useState();
-    const [selectedUsers, setSelectedusers] = useState([]);
-    const [searchResult, setSearchResult] = useState([]);
-    const [search, setSearch] = useState("");
-    const [loading, setLoading] = useState(false);
-
-    const { user, chats, setChats } = ChatState();
-    
-    const RemoveModel = () => {
-        closeModal(); // Close the modal when the 'X' icon is clicked
+    const resetModal = () => {
+        setGroupChatName("");
+        setSelectedUsers([]);
+        setSearchResult([]); // Clear the search results
     };
 
     const handleSearch = async (query) => {
@@ -69,7 +71,7 @@ const GroupChatModel = ({ children }) => {
 
     const handleSubmit = async() => {
         if(!groupChatName || !selectedUsers){
-            alert("please fill all the field")
+            alert("please fill all the fields");
             return;
         }
         try {
@@ -82,34 +84,27 @@ const GroupChatModel = ({ children }) => {
             const { data } =await axios.post("http://localhost:5000/api/chat/group",{
                 name: groupChatName,
                 users: JSON.stringify(selectedUsers.map((u) => u._id)),
-               
             },config);
             setChats([data, ...chats]);
-            setIsOpen(false);
-            alert("new group chat created");
-
+            closeModal(); // Close the modal after creating the chat
+            resetModal(); // Reset the modal fields
+            alert("New group chat created");
             
         } catch (error) {
-            alert("failed to create chat");
-            
+            alert("Failed to create chat");
         }
-
     };
 
     const handleDelete = (delUser) => {
-        setSelectedusers(
-          selectedUsers.filter((sel) => sel._id !== delUser._id));
+        setSelectedUsers(selectedUsers.filter((sel) => sel._id !== delUser._id));
     };
 
     const handleGroup = (userToAdd) => {
         if(selectedUsers.includes(userToAdd)){
-           alert("user already exist")
+           alert("User already exists");
            return;
-        };
-
-        setSelectedusers([...selectedUsers,userToAdd]);
-
-
+        }
+        setSelectedUsers([...selectedUsers,userToAdd]);
     };
 
     return (
@@ -120,7 +115,7 @@ const GroupChatModel = ({ children }) => {
             {isOpen && (
                 <div className="modal">
                     <div className="modal-content" ref={modalRef}>
-                        <div className='icon' onClick={RemoveModel}>
+                        <div className='icon' onClick={closeModal}>
                             <i class="fa-solid fa-xmark"></i> 
                         </div> 
                         <div className='GroupHeader'>
@@ -134,6 +129,7 @@ const GroupChatModel = ({ children }) => {
                                         className='Text'
                                         placeholder='Chat Name '
                                         onChange={(e) => setGroupChatName(e.target.value)}
+                                        value={groupChatName} // Add value attribute to bind the input with state
                                     />
                                 </div>
                                 <div className='GroupSearch'>
@@ -171,8 +167,6 @@ const GroupChatModel = ({ children }) => {
                                 Create Chat
                             </button>
                         </div>
-                        <span className="close" onClick={closeModal}>&times;</span>
-                        {children}
                     </div>
                 </div>
             )}

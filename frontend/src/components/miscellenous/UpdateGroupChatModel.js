@@ -20,11 +20,70 @@ const GroupModel = ({ fetchAgain,setFetchAgain }) => {
   const toggleModal = () => {
     setShowModal(!showModal);
   };
- const handleRemove = () =>{
- 
+ const handleRemove = async(user1) =>{
+  if(selectedChat.groupAdmin._id !== user._id && user1._id !== user._id)
+    {
+      alert("Only admin can remove the someone");
+      return;
+    }
+ try {
+  setLoading(true);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
+  const {data} =await axios.put(`http://localhost:5000/api/chat/groupremove`,
+    {
+      chatId: selectedChat._id,
+      userId: user1._id,
+    },
+    config
+  );
+  user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
+  setFetchAgain(!fetchAgain)
+  setLoading(false);
+  
+ } catch (error) {
+  alert("error occured while removing the user");
+  setLoading(false);
+  
+ }
  };
 
- const handleAddUser = async() =>{
+ const handleAddUser = async(user1) =>{
+  if(selectedChat.users.find((user) =>user._id=== user1._id))
+    {
+      alert("user already in group");
+      return;
+    }
+  if(selectedChat.groupAdmin._id !== user._id) {
+    alert("only admin can add someone");
+    return;
+  }  
+
+  try {
+    setLoading(true);
+    const config={
+      headers:{
+        Authorization:`Bearer ${user.token}`,
+      },
+    };
+    const {data} = await axios.put(`http://localhost:5000/api/chat/groupadd`,{
+      chatId:selectedChat._id,
+      userId:user1._id,
+    },
+    config
+  );
+  setSelectedChat(data);
+  setFetchAgain(!fetchAgain);
+  setLoading(false);
+    
+  } catch (error) {
+    alert("error occured during adding user ")
+    
+  }
+
 
  }
 
@@ -50,7 +109,7 @@ const GroupModel = ({ fetchAgain,setFetchAgain }) => {
     setRenameLoading(false);
 
   } catch (error) {
-    alert("Error occured");
+    alert("Error occured during rename");
     setRenameLoading(false);
   };
 
@@ -146,7 +205,7 @@ const GroupModel = ({ fetchAgain,setFetchAgain }) => {
               handleFunction={() => handleAddUser(user)}
               />
             ))
-          
+            
           )}
           
           </div>
