@@ -13,8 +13,8 @@ const sendMessage= asyncHandler(async(req,res)=>{
     }
 
     var newMessage = {
-        sender: req.user._id, 
-        content:content, 
+        sender: req.user._id,   
+        content:content,   
         chat: chatId    
     };
     try {

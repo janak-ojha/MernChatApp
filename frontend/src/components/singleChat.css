@@ -52,6 +52,12 @@
   position: relative;
   
 }
+.SingleChatInpu{
+  width: 99%;
+  border-radius: 5px;
+  border: none;
+  
+}
 
 /* Style for the group icon */
 .groupIcon {
@@ -104,4 +110,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 2px;
+}
+.SingleChatInput{
+  width: 99%;
+  border: none;
+}
+.messagePassingSingle{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  width: 50%;
+  height: 100%;
+
 }

@@ -5,7 +5,7 @@ import UserBadgeItem from "../userAvatar/UserBadgeItem"
 import axios from 'axios';
 import UserListItem from '../userAvatar/UserListItem';
 
-const GroupModel = ({ fetchAgain,setFetchAgain }) => {
+const GroupModel = ({ fetchAgain,setFetchAgain,fetchMessages }) => {
   // State to manage whether the group modal is visible or not
   const [showModal, setShowModal] = useState(false);
   const {selectedChat,setSelectedChat,user}=ChatState();
@@ -41,7 +41,8 @@ const GroupModel = ({ fetchAgain,setFetchAgain }) => {
     config
   );
   user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
-  setFetchAgain(!fetchAgain)
+  setFetchAgain(!fetchAgain);
+  fetchMessages();
   setLoading(false);
   
  } catch (error) {

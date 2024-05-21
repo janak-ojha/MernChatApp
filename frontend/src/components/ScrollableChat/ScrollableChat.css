@@ -1,0 +1,19 @@
+/* ScrollableChat.css */
+
+.sender-info {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Adjust spacing between profile pic and name */
+  }
+  
+  .profile-pic {
+    width: 5000px; /* Adjust profile picture size */
+    height: 50000px; /* Adjust profile picture size */
+    border-radius: 50%; /* Make profile picture round */
+    margin-right: 10px; /* Adjust spacing between profile pic and name */
+  }
+  
+  .sender-name {
+    font-weight: bold; /* Make sender's name bold */
+  }
+  
