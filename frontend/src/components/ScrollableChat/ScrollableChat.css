@@ -3,7 +3,8 @@
 .sender-info {
     display: flex;
     align-items: center;
-    margin-right: 10px; /* Adjust spacing between profile pic and name */
+    margin-right: 10px;
+     /* Adjust spacing between profile pic and name */
   }
   
   .profile-pic {

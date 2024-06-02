@@ -6,12 +6,18 @@ import ProfileModel from './miscellenous/ProfileModel';
 import UpdateGroupChatModel from './miscellenous/UpdateGroupChatModel';
 import axios from 'axios';
 import ScrollableChat from './ScrollableChat/ScrollablleChat'; // Corrected import
+import io from 'socket.io-client'
+
+
+const ENDPOINT = "http://localhost:5000";
+var socket , selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const { user, selectedChat } = ChatState();
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [newMessage, setNewMessage] = useState("");
+    const [socketConnected,setsocketConnected] = useState(false);
 
     const fetchMessages = async () => {
         if (!selectedChat) return;
@@ -29,6 +35,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             console.log(data);
             setMessages(data);
             setLoading(false);
+
+            socket.emit("join chat",selectedChat._id);
         } catch (error) {
             alert("Error while fetching message");
         }
@@ -36,7 +44,28 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
     useEffect(() => {
         fetchMessages();
+        selectedChatCompare = selectedChat;
     },[selectedChat]);
+
+    useEffect(() =>{
+        socket.on("message recieved", (newMessageRecieved) =>{
+            if(!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id)
+                {
+                    //  give notification
+                }
+            else{
+                setMessages([...messages,newMessageRecieved]);
+            }    
+        });
+    });
+
+    useEffect(() => {
+        socket = io(ENDPOINT);
+        socket.emit("setup", user);
+        socket.on("connection", () => setsocketConnected(true));
+    }, []);
+
+
 
     const sendMessage = async () => {
         if (newMessage.trim() !== '') {
