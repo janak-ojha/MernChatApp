@@ -11,6 +11,7 @@ const app = express();
 dotenv.config();
 connectDB();
 const cors = require("cors");
+const { Socket } = require("socket.io");
 
 app.use(cors()); // Moved cors middleware to the top
 
@@ -68,5 +69,9 @@ const PORT = process.env.PORT || 5000;
 
 
 
+    socket.off("setup",() => {
+        console.log("USER DISCONNECTED");
+        socket.leave(userData._id);
+    });
     });
  });

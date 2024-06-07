@@ -139,6 +139,7 @@ const SideDrawer = () => {
                 <button className="Sidebell">
                     <i className="fa-solid fa-bell"></i>
                 </button>
+                <div>{!notification.length && "No New Message"}</div>
             </div>
             <div className="Sidepicture">
                 <button className="Sideprofile" onClick={toggleDetails}>

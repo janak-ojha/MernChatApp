@@ -7,19 +7,32 @@ import UpdateGroupChatModel from './miscellenous/UpdateGroupChatModel';
 import axios from 'axios';
 import ScrollableChat from './ScrollableChat/ScrollablleChat'; // Corrected import
 import io from 'socket.io-client'
+import Lottie, { }  from 'react-lottie'
+import animationData from "../animation/typing.json";
+
 
 
 const ENDPOINT = "http://localhost:5000";
 var socket , selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-    const { user, selectedChat } = ChatState();
+    const { user, selectedChat ,notification,setNotification } = ChatState();
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const [newMessage, setNewMessage] = useState("");
     const [socketConnected,setsocketConnected] = useState(false);
     const [typing,setTyping] = useState(false);
     const [isTyping,setIsTyping] = useState(false);
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+
+        },
+    };
 
     const fetchMessages = async () => {
         if (!selectedChat) return;
@@ -58,11 +71,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         selectedChatCompare = selectedChat;
     },[selectedChat]);
 
+
     useEffect(() =>{
         socket.on("message recieved", (newMessageRecieved) =>{
             if(!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id)
                 {
-                    //  give notification
+                    if(!notification.includes(newMessageRecieved)) {
+                        setNotification([newMessageRecieved, ...notification]);
+                        setFetchAgain(!fetchAgain);
+                    }
                 }
             else{
                 setMessages([...messages,newMessageRecieved]);
@@ -95,7 +112,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     },
                     config
                 );
-                console.log("Message sent successfully:", data);
+               
                 
                 socket.emit("new message",data);
                 setMessages([...messages, data]);
@@ -160,13 +177,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
                     <div className="SingleDivSection">
                         {loading ? 
-                        (<div>Loading...</div>) :
+                        (<div></div>) :
                         (<div className='messagePassingSingle'>
                            <ScrollableChat messages={messages}/>
                         </div>)}
 
                         <form onSubmit={handleSubmit}>
-                            {isTyping ? <div>Loading...</div>: <></>}
+                            {isTyping ? <div>
+                                <Lottie
+                                options={defaultOptions}
+                                width={50}
+                                style={{marginBottom:3,marginLeft:0}}
+                                /></div>: <></>}
                             <input
                                 type="text"
                                 className="SingleChatInput"
