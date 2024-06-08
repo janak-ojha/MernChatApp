@@ -5,17 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import ChatLoading from '../chatLoading';
 import UserListItem from '../userAvatar/UserListItem';
+import { getSender } from '../../config/chatLogic';
 
 const SideDrawer = () => {
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingChat, setLoadingChat] = useState(false);
-    const { user,setSelectedChat,chats,setChats } = ChatState();
+    const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
     const [showDetails, setShowDetails] = useState(false);
     const [showDrawer, setShowDrawer] = useState(false);
+    const [showNotifications, setShowNotifications] = useState(false);
     const detailsRef = useRef(null);
     const sideDrawerRef = useRef(null); // Ref for the side drawer container
+    const notificationsRef = useRef(null); // Ref for the notifications container
     const history = useNavigate();
 
     const toggleDetails = () => {
@@ -26,10 +29,20 @@ const SideDrawer = () => {
         setShowDrawer(!showDrawer);
     };
 
+    const toggleNotifications = () => {
+        setShowNotifications(!showNotifications);
+    };
+
     const handleClickOutside = (event) => {
         if (sideDrawerRef.current && !sideDrawerRef.current.contains(event.target)) {
             setShowDrawer(false);
             setSearchResult([]);
+        }
+        if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
+            setShowNotifications(false);
+        }
+        if(detailsRef.current && !detailsRef.current.contains(event.target)){
+            setShowDetails(false);
 
         }
     };
@@ -39,8 +52,8 @@ const SideDrawer = () => {
         history('/');
     };
 
-    const handleSearch = async() => {
-        if(!search) {
+    const handleSearch = async () => {
+        if (!search) {
             alert("Please enter something in the search field.");
             return;
         }
@@ -48,39 +61,39 @@ const SideDrawer = () => {
         try {
             setLoading(true);
             const config = {
-                headers:{
-                    Authorization:`Bearer ${user.token}`,
-                },
-            };
-
-            const {data} = await axios.get(`http://localhost:5000/api/user/userall?search=${search}`,config);
-            setLoading(false);
-            setSearchResult(data);
-        } catch(error) {
-            alert("Failed to load search results.");
-        }
-    };
-
-    const accessChat = async(userId) => {
-        try {
-            setLoadingChat(true);
-
-            const config = {
-                headers:{
-                    "Content-Type":"application/json",
+                headers: {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
 
-            const { data }  = await axios.post("http://localhost:5000/api/chat/chataccess",{ userId },config);
+            const { data } = await axios.get(`http://localhost:5000/api/user/userall?search=${search}`, config);
+            setLoading(false);
+            setSearchResult(data);
+        } catch (error) {
+            alert("Failed to load search results.");
+        }
+    };
+
+    const accessChat = async (userId) => {
+        try {
+            setLoadingChat(true);
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const { data } = await axios.post("http://localhost:5000/api/chat/chataccess", { userId }, config);
             console.log(data);
-            
-            if(!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
+
+            if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
 
             setSelectedChat(data);
             setLoadingChat(false);
             setShowDrawer(false);
-        } catch(error) {
+        } catch (error) {
             alert("Error fetching the chat.");
         }
     };
@@ -122,24 +135,44 @@ const SideDrawer = () => {
                         </button>
                     </div>
                     {loading ? (
-                        <ChatLoading/>
+                        <ChatLoading />
                     ) : (
                         searchResult?.map((user) => (
                             <UserListItem
                                 key={user._id}
                                 user={user}
-                                handleFunction={()=>accessChat(user._id)}
+                                handleFunction={() => accessChat(user._id)}
                             />
                         ))
                     )}
                 </div>
             )}
             <div className="Sidetalk">Talk-A-Tive</div>
-            <div className="Sideicon">
-                <button className="Sidebell">
+            <div className="Sideicon" ref={notificationsRef}>
+                <button className="Sidebell" onClick={toggleNotifications}>
+                {notification.length > 0 && (
+                        <div className="custom-badge">{notification.length}</div>
+                    )}
                     <i className="fa-solid fa-bell"></i>
                 </button>
-                <div>{!notification.length && "No New Message"}</div>
+                {showNotifications && (
+                    <ul className='SideNotification'>
+                        {!notification.length && "No New Message"}
+                        {notification.map((notif) => (
+                            <li 
+                            key={notif._id} 
+                            onClick={() =>{
+                                setSelectedChat(notif.chat);
+                                setNotification(notification.filter((n) => n !== notif));
+                            }}
+                             >
+                                {notif.chat.isGroupChat
+                                    ? `New Message in ${notif.chat.chatName}`
+                                    : `New Message from ${getSender(user, notif.chat.users)}`}
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
             <div className="Sidepicture">
                 <button className="Sideprofile" onClick={toggleDetails}>
@@ -156,7 +189,7 @@ const SideDrawer = () => {
                         Pic: <img src={user.pic} alt="Profile" style={{ width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover' }} />
                     </p>
                     <p>Name: {user.name}</p>
-                    <p>Email: {user.email}</p>
+                    <p className='Sideemails'>Email: {user.email}</p>
                     {/* You can add more details here */}
                 </div>
             )}
