@@ -11,6 +11,7 @@ const SideDrawer = () => {
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
+     // eslint-disable-next-line no-unused-vars
     const [loadingChat, setLoadingChat] = useState(false);
     const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
     const [showDetails, setShowDetails] = useState(false);
