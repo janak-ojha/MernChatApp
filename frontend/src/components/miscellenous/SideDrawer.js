@@ -148,7 +148,7 @@ const SideDrawer = () => {
                     )}
                 </div>
             )}
-            <div className="Sidetalk">Talk-A-Tive</div>
+            <div className="Sidetalk">Bukki-Chat</div>
             <div className="Sideicon" ref={notificationsRef}>
                 <button className="Sidebell" onClick={toggleNotifications}>
                 {notification.length > 0 && (
