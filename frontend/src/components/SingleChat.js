@@ -12,7 +12,7 @@ import animationData from "../animation/typing.json";
 
 
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = `${process.env.REACT_APP_BASE_URL_BACKEND}`;
 var socket , selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -44,7 +44,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             };
             setLoading(true);
             const { data } = await axios.get(
-                `http://localhost:5000/api/message/${selectedChat._id}`,
+                `${process.env.REACT_APP_BASE_URL_BACKEND}/api/message/${selectedChat._id}`,
                 config
             );
             console.log(data);
@@ -105,7 +105,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 setNewMessage("");
 
                 const { data } = await axios.post(
-                    'http://localhost:5000/api/message/',
+                    `${process.env.REACT_APP_BASE_URL_BACKEND}/api/message/`,
                     {
                         content: newMessage,
                         chatId: selectedChat._id,

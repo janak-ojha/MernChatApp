@@ -18,7 +18,7 @@ const MyChat = ({fetchAgain}) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get("http://localhost:5000/api/chat/chatfetch", config);
+      const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/chatfetch`, config);
       setChats(data);
     } catch (error) {
       alert("Failed to load the chat");
