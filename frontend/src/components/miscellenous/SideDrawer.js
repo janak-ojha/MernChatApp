@@ -67,7 +67,7 @@ const SideDrawer = () => {
                 },
             };
 
-            const { data } = await axios.get(`http://localhost:5000/api/user/userall?search=${search}`, config);
+            const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/user/userall?search=${search}`, config);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -86,8 +86,8 @@ const SideDrawer = () => {
                 },
             };
 
-            const { data } = await axios.post("http://localhost:5000/api/chat/chataccess", { userId }, config);
-            console.log(data);
+            const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/chataccess`, { userId }, config);
+            
 
             if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
 

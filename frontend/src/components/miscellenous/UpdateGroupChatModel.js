@@ -33,7 +33,7 @@ const GroupModel = ({ fetchAgain,setFetchAgain,fetchMessages }) => {
       Authorization: `Bearer ${user.token}`,
     },
   };
-  const {data} =await axios.put(`http://localhost:5000/api/chat/groupremove`,
+  const {data} =await axios.put(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/groupremove`,
     {
       chatId: selectedChat._id,
       userId: user1._id,
@@ -70,7 +70,7 @@ const GroupModel = ({ fetchAgain,setFetchAgain,fetchMessages }) => {
         Authorization:`Bearer ${user.token}`,
       },
     };
-    const {data} = await axios.put(`http://localhost:5000/api/chat/groupadd`,{
+    const {data} = await axios.put(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/groupadd`,{
       chatId:selectedChat._id,
       userId:user1._id,
     },
@@ -98,7 +98,7 @@ const GroupModel = ({ fetchAgain,setFetchAgain,fetchMessages }) => {
         Authorization: `Bearer ${user.token}`,
       },
     };
-    const {data} = await axios.put('http://localhost:5000/api/chat/rename',
+    const {data} = await axios.put(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/rename`,
       {
         chatId: selectedChat._id,
         chatName: groupChatName,  
@@ -133,7 +133,7 @@ const GroupModel = ({ fetchAgain,setFetchAgain,fetchMessages }) => {
 
         },
     };
-    const {data} =await axios.get(`http://localhost:5000/api/user/userall?search=${search}`,config);
+    const {data} =await axios.get(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/user/userall?search=${search}`,config);
     setLoading(false);
     setSearchResult(data);
     

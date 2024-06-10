@@ -6,7 +6,7 @@ import SingleChat from './SingleChat';
 
 
 const ChatBox = ({fetchAgain,setFetchAgain}) => {
-  const {selectedChat} = ChatState();
+  // const {selectedChat} = ChatState();
   return (
     <div className='chatBox1'>
       <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>

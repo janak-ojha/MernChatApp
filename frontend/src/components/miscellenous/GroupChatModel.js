@@ -61,7 +61,7 @@ const GroupChatModel = () => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            const { data } = await axios.get(`http://localhost:5000/api/user/userall?search=${query}`, config);
+            const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/user/userall?search=${query}`, config);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -81,7 +81,7 @@ const GroupChatModel = () => {
                 },
             };
             
-            const { data } =await axios.post("http://localhost:5000/api/chat/group",{
+            const { data } =await axios.post(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/group`,{
                 name: groupChatName,
                 users: JSON.stringify(selectedUsers.map((u) => u._id)),
             },config);

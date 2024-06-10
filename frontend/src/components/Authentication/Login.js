@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] =useState("");
@@ -25,7 +26,7 @@ const Login = () => {
       
       let fields = {email,password};
       
-      let data = await fetch(`http://localhost:5000/api/user/login`,{
+      let data = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/user/login`,{
         method:"post",
         body: JSON.stringify(fields),
         headers:{
@@ -34,14 +35,15 @@ const Login = () => {
       });
       data = await data.json();
       
+      
 
     
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));  
       setLoading(false);
-      history("/chats"); 
+      history("/chats");   
     } 
     catch (error) {
-      console.log(error);
+      console.log(error);    
       alert("An error occurred while login");
       setLoading(false);
     }
@@ -95,8 +97,8 @@ const Login = () => {
         style={{backgroundColor:"red", color:"white",width:"100%" ,padding:"8px",borderRadius:"10px",  marginTop:"3px"}} 
         type="submit" 
         onClick={() => {
-          setEmail("guest@gmail.com");
-          setPassword("12345");
+          setEmail("guest1@gmail.com");
+          setPassword("123");
         }}>Get Guest User Credentials</button>
          
       </form>

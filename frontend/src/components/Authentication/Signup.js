@@ -37,15 +37,15 @@ const Signup = () => {
       alert("photo is uploading in cloudinary, So please wait!");
       return;
     }
-    console.log("dihfdo");
+   
 
     try {
       
     
-      console.log("idhfoid");
+    
       let fields = {name,email,password,pic};
       console.log(fields);
-      let data = await fetch(`http://localhost:5000/api/user/register`,{
+      let data = await fetch(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/user/register`,{
         method:"post",
         body: JSON.stringify(fields),
         headers:{
@@ -54,11 +54,11 @@ const Signup = () => {
       });
 
       data = await data.json();
-      console.log(data)
+    
 
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      history("/login"); // Corrected this line
+      history("/chats"); // Corrected this line
     } catch (error) {
       console.log(error);
       alert("An error occurred while registering");
