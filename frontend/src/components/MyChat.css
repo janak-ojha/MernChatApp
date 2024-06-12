@@ -33,6 +33,20 @@
       margin-left: 20px;
       overflow-y: auto; /* Add this line to make the container scrollable */
   }
+  .chatBox1{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 70%;
+    align-items: center;
+    height: 80vh;
+    margin-top: 12px;
+    margin-right: 20px;
+    margin-left: 20px;
+    
+}
   
     .myChats {
       font-size: 2px;
