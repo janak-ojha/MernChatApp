@@ -46,5 +46,18 @@
     
     
 
-  }  
+  } 
+  @media (max-width: 768px) {
+    .LoginInput{
+        padding: 10px;
+        border: none;
+        background-color: white;
+        width: 50%;
+        
+        
+        
+        
+    
+      } 
+  }
   

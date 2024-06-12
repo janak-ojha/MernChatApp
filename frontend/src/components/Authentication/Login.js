@@ -73,7 +73,7 @@ const Login = () => {
         <div className="paswordInputContainer">
         <input
           type={show ? "text" : "password"}
-          className='SignupInput'
+          className='LoginInput'
           id="password" // Add an ID to match the label's `for` attribute
           placeholder='Enter your password'
           value={password}
