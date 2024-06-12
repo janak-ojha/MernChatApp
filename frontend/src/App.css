@@ -2,6 +2,8 @@
 
 .App {
   min-height: 100vh;
+  width: 100%;
+  position: fixed;
   display: flex;
   background-image: url("./images.jpeg");
   background-position: center;
