@@ -133,7 +133,7 @@ const Signup = () => {
         <div className="SignuppasswordInputContainer">
           <input
             type={show1 ? "text" : "password"}
-            className="SignupInput"
+            className="LoginInput"
             id="password"
             placeholder="Enter your password"
             required
@@ -157,7 +157,7 @@ const Signup = () => {
         <div className="SignuppasswordInputContainer2">
           <input
             type={show ? "text" : "password"}
-            className="SignupInput"
+            className="LoginInput"
             id="confirmPassword"
             placeholder="Confirm Password"
             required
