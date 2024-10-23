@@ -30,7 +30,7 @@ function HomePage() {
   return (
     <div className='Homecontainer'>
       <div className="Homebox">
-         Talk-A-Tive
+         Bukki-chat
       </div>
       <div>
       <div className='Homebox2'>

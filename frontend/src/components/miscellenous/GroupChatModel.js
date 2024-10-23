@@ -80,7 +80,7 @@ const GroupChatModel = () => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            
+             
             const { data } =await axios.post(`${process.env.REACT_APP_BASE_URL_BACKEND}/api/chat/group`,{
                 name: groupChatName,
                 users: JSON.stringify(selectedUsers.map((u) => u._id)),
