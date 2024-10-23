@@ -14,7 +14,6 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
-
   const handleClick = () => setShow(!show);
   const handleClick1 = () => setShow1(!show1);
 
@@ -67,71 +66,43 @@ const Signup = () => {
     }
   };
 
-   // Function to handle file upload and convert to base64
-   const Uploadimage = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        try {
-            const base64 = await convertToBase64(file);
-            setPic(base64);
-        } catch (error) {
-            console.error("Error converting file to base64:", error);
-        }
+  const postDetails = (pics) => {
+    setLoading(false);
+    console.log(pics);
+    if (!pics) {
+      alert("Please select the image");
+      setLoading(false);
+      return;
     }
-};
 
-// Function to convert file to base64
-const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-        const filereader = new FileReader();
-        filereader.readAsDataURL(file);
-        filereader.onload = () => {
-            resolve(filereader.result);
-        };
-        filereader.onerror = (error) => {
-            reject(error);
-        };
-    });
-};
-
-
-  // const postDetails = (pics) => {
-  //   setLoading(false);
-  //   console.log(pics);
-  //   if (!pics) {
-  //     alert("Please select the image");
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   if (pics.type === "image/jpeg" || pics.type === "image/png") {
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
       
-  //     const data = new FormData();
-  //     data.append("file", pics);
-  //     data.append("upload_preset", "chat-app");
-  //     data.append("cloud_name", "daq3galr7");
-  //     fetch("https://api.cloudinary.com/v1_1/daq3galr7/image/upload", {
-  //       method: "POST",
-  //       body: data,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //         setPic(data.url.toString());
-  //         console.log(data.url.toString());
-  //         setLoading(false);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         alert(err.message);
-  //         setLoading(false);
-  //       });
-  //   } else {
-  //     alert("please select the image");
-  //     setLoading(false);
-  //     return;
-  //   }
-  // };
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "chat-app");
+      data.append("cloud_name", "daq3galr7");
+      fetch("https://api.cloudinary.com/v1_1/daq3galr7/image/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setPic(data.url.toString());
+          console.log(data.url.toString());
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.message);
+          setLoading(false);
+        });
+    } else {
+      alert("please select the image");
+      setLoading(false);
+      return;
+    }
+  };
 
   return (
     <div className="Signup">
@@ -210,10 +181,14 @@ const convertToBase64 = (file) => {
         <input
           type="file"
           id="pic"
-          value={pic}
-          onChange={Uploadimage}
+          onChange={(e) => {
+            // Check if the event target is the file input element
+            if (e.target.id === "pic") {
+              postDetails(e.target.files[0]);
+            }
+          }}
         />
-          {pic?<img src={pic} alt="" /> :''}   
+
         <button
           style={{
             backgroundColor: "blue",
